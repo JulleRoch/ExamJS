@@ -47,6 +47,7 @@ module.exports = class UserDAO {
             (err, row) => {
                 if (err == null) {
                     user = new User(row.login, row.password);
+                    user.id = row.id;
                 }
             },
             () => { done(user) }
@@ -58,6 +59,7 @@ module.exports = class UserDAO {
             (err, row) => {
                 if (err == null) {
                     let u = new User(row.login, row.password);
+                    u.id = row.id;
                     users.push(u);
                 }
             },

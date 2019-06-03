@@ -5,10 +5,12 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const UserDAO = require("./model/userDAO");
 const DefiDAO = require("./model/defiDAO");
+const LikeDAO = require("./model/likeDAO");
 
 const userdao = new UserDAO(db);
 const defidao = new DefiDAO(db);
-require('./model/seeder')(userdao, defidao);
+const likedao = new LikeDAO(db);
+require('./model/seeder')(userdao, defidao, likedao);
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -29,7 +31,8 @@ app.use(passport.session());
 
 const auth = require('./passport')(passport, userdao);
 require('./api/user')(app, userdao, auth);
-require('./api/defi')(app, defidao, auth);
+require('./api/defi')(app, defidao, userdao, likedao, auth);
+require('./api/like')(app, likedao, userdao, auth);
 require('./route')(app, passport, auth);
 
 

@@ -1,5 +1,6 @@
 module.exports = class Defi{
     constructor(nom, description, idUser, date = null, masked = false, nbLike=0,nbComment=0, nbFinish = 0){
+            this.id = null;
             this.nom = nom;
             this.description = description;
             this.date = date;

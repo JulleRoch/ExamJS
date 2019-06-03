@@ -90,6 +90,11 @@ hr {
   font-size: 30px;
 }
 
+#headerwrap h4 {
+  color: white;
+  font-size: 20px;
+}
+
 #headerwrap h5 {
   color: white;
   font-weight: 700;
@@ -99,6 +104,45 @@ hr {
 #headerwrap p {
   text-align: left;
   color: white
+}
+
+#headerwrap div.card {
+  border : solid;
+  border-color: goldenrod;
+  margin: 10px;
+  max-width: 95%;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+#headerwrap .card-header h4{
+  color : black;
+}
+
+#headerwrap .card-header h6{
+  color: #1F2A36 	;
+}
+
+.en-tete, .pied-page {
+  margin-left: 0;
+  margin-right: 0;
+  max-width: 100%;
+}
+
+.gris {
+  color:gray;
+  font-size : 12px;
+  font-style :italic;
+}
+
+#headerwrap .card-title{
+  color : black;
+}
+#headerwrap .card-text{
+  color : black;
+}
+
+/*#headerwrap .card-header {
 }
 
 /* intro Wrap */
@@ -263,3 +307,4 @@ hr {
   font-weight: 600;
   margin: 15px 0;
 }
+

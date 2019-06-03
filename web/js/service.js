@@ -36,3 +36,30 @@ class UserService extends Service{
         ajax("GET", this.serviceUrl + "/all", done);
     }
 }
+
+class DefiService extends Service{
+    constructor(){
+        super("defi");
+    }
+
+    getAllOrder(order, done){
+        ajax("GET", this.serviceUrl + "/order/" + order, done);
+    }
+    
+    updateLike(objet, done){
+        ajax("PUT", this.serviceUrl, done, objet)
+    }
+}
+
+class LikeService extends Service{
+    constructor(){
+        super("like");
+    }
+    update(objet, done) {
+        ajax("PUT", this.serviceUrl, done, objet)
+    }
+
+    getLike(idDefi, done) {
+        ajax("GET", this.serviceUrl + "/" + idDefi, done)
+    }
+}

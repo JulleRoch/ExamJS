@@ -8,29 +8,20 @@
     <meta content="" name="description">
   
     <!-- Favicons -->
-    <link href="/iconCAP.jpg" rel="icon">
-    <link href="/iconCAP.jpg" rel="apple-touch-icon">
+    <link href="/iconCAP.png" rel="icon">
+    <link href="/iconCAP.png" rel="apple-touch-icon">
   
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic|Raleway:400,300,700" rel="stylesheet">
-      
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> 
-      <link rel="stylesheet" href="/style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body data-spy="scroll" data-offset="0" data-target="#navigation" id="headerwrap">
-        <div id="navigation" class="navbar navbar-default navbar-fixed-top">
-                <div class="container">
-                  <div class="navbar-header">
-                      <table>
-                          <tr>
-                              <td><img class="img-responsive" src="/iconCAP.jpg" style="width: 18%"/></td>
-                                <td><a class="navbar-brand smothscroll" href=""><b>CapOuPasCap?</b></a></td>
-                        </tr>
-                      </table>
-                    
-                  </div>
-              </div>
-        </div>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light" >
+                <a class="navbar-brand" href="/index" ><img src="/iconCAP.png" width="30" height="30"  class="d-inline-block img-responsive" alt=""> <b>CapOuPasCap?</b></a>
+        </nav>
         
     <p id="detail"></p>      
 <div class="container">
@@ -54,7 +45,7 @@
 </div>
 
 <div class="container">
-    <p> <strong>Pas encore inscrit?</strong> <a onclick="return controleur.showSignUp()">Fais le vite, ici!</a></p>
+    <p><strong>Pas encore inscrit?</strong><a href="#" onclick="return controleur.showSignUp()">Fais le vite, ici!</a></p>
 </div>
 
 <div class="modal fade" id="dialog-add-user">
@@ -85,9 +76,6 @@
         </div>
     </div>
 </div>
-
-<script src="lib/jquery/jquery.min.js"></script>
-<script src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="/mainTemplate.js"></script>
 <script src="/tools.js"></script>
 <script src="/model.js"></script>

@@ -48,13 +48,15 @@ module.exports = (app, dao,auth) => {
             res.status(400).type('text/plain').end()
             return
         }
-        dao.update(req.params.login, user, (err) => {
-            if (err == null) {
-                res.status(200).type('text/plain').end()
-            } else {
-                res.status(500).end()
-            }
-        })
+        if(user.login === req.user.login){
+            dao.update(req.params.login, user, (err) => {
+                if (err == null) {
+                    res.status(200).type('text/plain').end()
+                } else {
+                    res.status(500).end()
+                }
+            })
+        }
     });
 
 };

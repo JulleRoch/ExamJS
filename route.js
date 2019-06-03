@@ -5,7 +5,7 @@ module.exports = (app, passport, auth) => {
     const js = web + '/js/';
     const img = css + '/img/';
 
-     app.get(['/', '/login'], (req, res) => {
+     app.get(['/login'], (req, res) => {
         if (req.originalUrl === '/') {
             res.sendFile(web + 'login.html');
             return
@@ -13,12 +13,16 @@ module.exports = (app, passport, auth) => {
         res.sendFile(web + req.path  + '.html')
     });
 
-    app.get(['/', '/index', '/creation','*.html'], auth.isLoggedInWeb, (req, res) => {
+    app.get(['/', '/index', '/creation','/listeDefi'], auth.isLoggedInWeb, (req, res) => {
         if (req.originalUrl === '/') {
             res.sendFile(web + 'index.html');
             return
         }
         res.sendFile(web + req.path + '.html')
+    });
+
+    app.get('*.html', auth.isLoggedInWeb, (req, res) => {
+        res.sendFile(web + req.path)
     });
 
     app.post('/authenticate', passport.authenticate('local-login', {
