@@ -17,8 +17,18 @@ module.exports = (app, dao,auth) => {
     });
 
 
-    app.get("/user/:login",  (req, res) => {
+    app.get("/user/login/:login",  (req, res) => {
         dao.getByLogin(req.params.login, (user) => {
+            if (user == null) {
+                res.status(404).type('text/plain').end()
+            } else {
+                res.json(user)
+            }
+        })
+    });    
+    
+    app.get("/user/:id",  (req, res) => {
+        dao.getById(req.params.id, (user) => {
             if (user == null) {
                 res.status(404).type('text/plain').end()
             } else {

@@ -53,6 +53,19 @@ module.exports = class UserDAO {
             () => { done(user) }
         )
     }
+
+    getById(id, done){
+        let user = null;
+        this.db.each("SELECT * FROM user WHERE id = ?", [id],
+            (err, row) => {
+                if (err == null) {
+                    user = new User(row.login, row.password);
+                    user.id = row.id;
+                }
+            },
+            () => { done(user) }
+        )
+    }
     getAll(done){
         const users = [];
         this.db.each("SELECT * FROM user",

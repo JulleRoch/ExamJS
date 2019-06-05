@@ -6521,7 +6521,7 @@ var documentElement = document.documentElement;
 		container = document.createElement( "div" ),
 		div = document.createElement( "div" );
 
-	// Finish early in limited (non-browser) environments
+	// Realize early in limited (non-browser) environments
 	if ( !div.style ) {
 		return;
 	}

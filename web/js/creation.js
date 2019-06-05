@@ -12,9 +12,8 @@ class DefiControlleur {
                     if(status === 200){
                         $('#nom').value = "";
                         $('#description').value = "";
-                        window.location.replace("/index")
+                        window.location.replace("/listeDefi?type=byUser&idUser="+ user.id)
                     }
-                    alert(status);
                 });
                 return false
             }

@@ -1,5 +1,5 @@
 module.exports = class Defi{
-    constructor(nom, description, idUser, date = null, masked = false, nbLike=0,nbComment=0, nbFinish = 0){
+    constructor(nom, description, idUser, date = null, masked = false, nbLike=0,nbComment=0, nbRealize = 0){
             this.id = null;
             this.nom = nom;
             this.description = description;
@@ -9,7 +9,7 @@ module.exports = class Defi{
             this.idUser = idUser;
             this.nbLike = nbLike;
             this.masked = masked;
-            this.nbFinish = nbFinish;
+            this.nbRealize = nbRealize;
             this.nbComment = nbComment;
     }
 }

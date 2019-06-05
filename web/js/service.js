@@ -28,8 +28,12 @@ class UserService extends Service{
         ajax("GET", this.serviceUrl, done);
     }
 
+    getById(id, done) {
+        ajax("GET", this.serviceUrl + "/" + id, done)
+    }
+
     getByLogin(login, done) {
-        ajax("GET", this.serviceUrl + "/" + login, done)
+        ajax("GET", this.serviceUrl + "/login/" + login, done)
     }
 
     getAll(done){
@@ -42,12 +46,30 @@ class DefiService extends Service{
         super("defi");
     }
 
-    getAllOrder(order, done){
-        ajax("GET", this.serviceUrl + "/order/" + order, done);
+    getList(type, order, id /*user ou defi suivant le type*/, done){
+        let url = this.serviceUrl;
+        if(type==="all"){
+            url += "/order/" + order;
+        }
+        if(type==="byUser"){
+            url += "/user/" + id;
+        }
+        if(type==="realize"){
+            url += "/realize/" + id;
+        }
+        if(type==="byId"){
+            url += "/" + id;
+        }
+        ajax("GET", url, done);
     }
     
     updateLike(objet, done){
         ajax("PUT", this.serviceUrl, done, objet)
+    }
+
+    updatePost(type, id, objet, done){
+        let url = this.serviceUrl + "/"+ type  + "/" + id;
+        ajax("PUT", url, done, objet);
     }
 }
 
@@ -61,5 +83,30 @@ class LikeService extends Service{
 
     getLike(idDefi, done) {
         ajax("GET", this.serviceUrl + "/" + idDefi, done)
+    }
+}
+
+class SuiviService extends Service{
+    constructor(){
+        super("suivi");
+    }
+    delete(idDefi, done) {
+        ajax("DELETE", this.serviceUrl + "/" + idDefi, done)
+    }
+    getByUser(idUser, done) {
+        ajax("GET", this.serviceUrl + "/" + idUser, done)
+    }
+}
+class PostService extends Service{
+    constructor(){
+        super("post");
+    }
+
+    getCommentByDefi(id, done){
+        ajax("GET", this.serviceUrl + "/comment/" + id, done)
+    }
+    
+    getRealizeByDefi(id, done){
+        ajax("GET", this.serviceUrl + "/realize/" + id, done)
     }
 }

@@ -46,7 +46,7 @@ module.exports = class LikeDAO {
         this.db.each("SELECT * FROM like WHERE idUser=?", [idUser],
             (err, row) => {
                 if (err === null) {
-                    let l = new User(row.idUser, row.idDefi);
+                    let l = new Like(row.idUser, row.idDefi);
                     l.id = row.id;
                     likes.push(l);
                 }
@@ -64,7 +64,7 @@ module.exports = class LikeDAO {
         this.db.each("SELECT * FROM like WHERE idDefi=?", [idDefi],
             (err, row) => {
                 if (err === null) {
-                    let l = new User(row.idUser, row.idDefi);
+                    let l = new Like(row.idUser, row.idDefi);
                     l.id = row.id;
                     likes.push(l);
                 }

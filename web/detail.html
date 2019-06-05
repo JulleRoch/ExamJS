@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>CapOuPasCap</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicons -->
+    <link href="/iconCAP.png" rel="icon">
+    <link href="/iconCAP.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic|Raleway:400,300,700"
+        rel="stylesheet">
+
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
+    <!-- Bootstrap CSS File -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body data-spy="scroll" data-offset="0" data-target="#navigation" id="headerwrap">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/index"><img src="/iconCAP.png" width="30" height="30"
+                class="d-inline-block align-top" alt=""> <b>CapOuPasCap?</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/listeDefi">Les défis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/creation">Créer un nouveau défi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Mon profil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Se déconnecter</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <p id="msg"></p>
+    <div id="detail-defi">
+        <div class="card">
+            <div class="card-header container en-tete row">
+                <div class="col-12 col-sm-8">
+                    <h4 id="nom-challenge"></h4>
+                </div>
+                <div class="col-6 col-sm-2">
+                    <h6 class="gris"><span class="gris">Posté le</span><span id="date-challenge"></span> </h6>
+                </div>
+                <div class="col-6 col-sm-2">
+                    <h6 class="gris"><span class="gris">par </span><span id="user-challenge"></span></h6>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Description</h5>
+                <p class="card-text" id="description-challenge"></p>
+            </div>
+            <div class="card-body" id="participants">
+            </div>
+            <div class="card-body" id="commentaires">
+            </div>
+        </div>
+    </div>
+    <div>
+        <p><br /></p>
+    </div>
+    <nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-light">
+
+        <div class="container row pied-page">
+            <div class="col-3 col-sm-3">
+                <h6> <a href="#commentaires"><img src="/comment.png" width="20" height="20" class="img-responsive"
+                            alt="" data-toggle="modal" data-target="#dialog-add-comment"></a>
+                            <span id="comment-challenge"></span></h6>
+            </div>
+            <div class="col-3 col-sm-3">
+                <h6><a href="#participants"><img src="/ok.png" width="20" height="20" class="img-responsive"
+                            alt="" data-toggle="modal" data-target="#dialog-add-realize"></a>
+                            <span id="realize-challenge"></span></h6>
+            </div>
+            <div class="col-3 col-sm-3">
+                <h6><img id="like-img" src="/pouce.png" width="20" height="20" class="img-responsive" alt=""><span
+                        id="like-challenge"></span></h6>
+            </div>
+            <div class="col-3 col-sm-3">
+                <h6><a href="#"><img src="/up.png" width="20" height="20" class="img-responsive" alt=""></a></h6>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="modal fade" id="dialog-add-comment">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #34495e">
+                    <table width=100%>
+                        <tr>
+                            <td>
+                                <h3 class="modal-title" width=80%>Poster un commentaire</h3>
+                            </td>
+                            <td><button type="button" class="close" data-dismiss="modal"
+                                    style="color: aliceblue">&times;</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-body">
+                    <form class="style-form" id="form-add-comment" onsubmit="return controleur.addComment()">
+                        <div class="form-group">
+                            <textarea class="form-control" name="description-comment" id="description-comment"
+                                maxlength="140" rows=4 cols=40
+                                placeholder="Votre commentaire ne doit pas dépasser 140 caractères."
+                                required></textarea>
+                        </div>
+                        <div class="form-send">
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Poster</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="dialog-add-realize">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #34495e">
+                    <table width=100%>
+                        <tr>
+                            <td>
+                                <h3 class="modal-title" width=80%>Poster une réalisation</h3>
+                            </td>
+                            <td><button type="button" class="close" data-dismiss="modal"
+                                    style="color: aliceblue">&times;</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-body">
+                    <form class="style-form" id="form-add-realize" onsubmit="return controleur.addRealize()">
+                        <div class="form-group">
+                            <label for="description-realize">
+                                <h6>Description</h6>
+                            </label>
+                            <textarea class="form-control" name="description-realize" id="description-realize"
+                                maxlength="140" rows=4 cols=40
+                                placeholder="La description de votre défi ne doit pas dépasser 140 caractères."
+                                required></textarea>
+                            <label for="preuve-realize">
+                                <h6>Télécharger une photo ou vidéo pour prouver la réalisation du défi</h6>
+                            </label>
+                            <input type="file" id="preuve-realize" name="preuve-realize" accept="image/png, image/jpeg, video/mp4, video/webm, video/ogg" required>
+                        </div>
+                        <div class="form-send">
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Poster</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/mainTemplate.js"></script>
+    <script src="/tools.js"></script>
+    <script src="/model.js"></script>
+    <script src="/service.js"></script>
+    <script src="/detail.js"></script>
+</body>
+
+</html>

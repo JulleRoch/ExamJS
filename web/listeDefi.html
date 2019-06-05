@@ -1,101 +1,105 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8">
-  <title>CapOuPasCap</title>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta content="" name="keywords">
-  <meta content="" name="description">
+        <meta charset="utf-8">
+        <title>CapOuPasCap</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
 
-  <!-- Favicons -->
-  <link href="/iconCAP.png" rel="icon">
-  <link href="/iconCAP.png" rel="apple-touch-icon">
+        <!-- Favicons -->
+        <link href="/iconCAP.png" rel="icon">
+        <link href="/iconCAP.png" rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic|Raleway:400,300,700" rel="stylesheet">
-   
-  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
-  <!-- Bootstrap CSS File -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"> 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/style.css">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic|Raleway:400,300,700"
+                rel="stylesheet">
+
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
+        <!-- Bootstrap CSS File -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/style.css">
 </head>
+
 <body data-spy="scroll" data-offset="0" data-target="#navigation" id="headerwrap">
-      <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="/index"><img src="/iconCAP.png" width="30" height="30" class="d-inline-block img-responsive" alt=""> <b>CapOuPasCap?</b></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light" id="navbar">
+                <a class="navbar-brand" href="/index"><img src="/iconCAP.png" width="30" height="30"
+                                class="d-inline-block img-responsive" alt=""> <b>CapOuPasCap?</b></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                      <a class="nav-link" href="/listeDefi">Les défis</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="/creation">Créer un nouveau défi</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="">Mon profil</a>
-                    </li>
-                    <li class="nav-item">
-                            <a class="nav-link" href="/logout">Se déconnecter</a>
-                    </li>
-                </ul>
-              </div>
-             
+                        <ul class="navbar-nav mr-auto">
+                                <li class="nav-item active">
+                                        <a class="nav-link" href="/listeDefi">Les défis</a>
+                                </li>
+                                <li class="nav-item">
+                                        <a class="nav-link" href="/creation">Créer un nouveau défi</a>
+                                </li>
+                                <li class="nav-item">
+                                        <a class="nav-link" href="">Mon profil</a>
+                                </li>
+                                <li class="nav-item">
+                                        <a class="nav-link" href="/logout">Se déconnecter</a>
+                                </li>
+                        </ul>
+                </div>
+        </nav>
 
-          </div>
-          <span class="navbar-text">
-                Trié par
-        </span>
-        <a class="nav-link  mr-sm-2" href="#" onclick="return controleur.changeOrder(this);" id="nbLike">Popularité</a>
-        <span class="navbar-text">
-                |
-        </span>
-        <a class="nav-link  mr-sm-2" href="#" onclick="return controleur.changeOrder(this);" id="date">Date de publication</a>
-          </nav>
-
- <div >
-    <h3 style="text-align: center"> Tous les défis </strong></h3>
-</div>
-<div  id="listeDefi">
-        <div class="card">
-                <div class="card-header container en-tete row">
-                        <div class="col-12 col-sm-8">
-                                <h4>Challenge Cheese</h4>
+        <div>
+                <h3 style="text-align: center" id="titre"></h3>
+        </div>
+        <div id="listeDefi">
+               < <div class="card">
+                        <div class="card-header container en-tete row">
+                                <div class="col-12 col-sm-8">
+                                        <h4>Challenge Cheese</h4>
+                                </div>
+                                <div class="col-6 col-sm-2">
+                                        <h6 class="gris"><span class="gris">Posté le</span> 3 juin 2018</h6>
+                                </div>
+                                <div class="col-6 col-sm-2">
+                                        <h6 class="gris"><span class="gris">par </span>login3568</h6>
+                                </div>
                         </div>
-                        <div class="col-6 col-sm-2">
-                                <h6 class="gris"><span class="gris">Posté le</span> 3 juin 2018</h6>
+                        <div class="card-body">
+                                <p class="card-text">Ut dignissim finibus velit, sollicitudin ultricies purus lobortis
+                                        in. Duis eget ultrices ante. Pellentesque habitant morbi tristique nullam. </p>
                         </div>
-                        <div class="col-6 col-sm-2">
-                                <h6 class="gris"><span class="gris">par </span>login3568</h6>
+                        <div class="card-footer container row pied-page">
+                                <div class="col-4 col-sm-4">
+                                        <h6> <img src="/comment.png" width="20" height="20" class="img-responsive"
+                                                        alt="">5</h6>
+                                </div>
+                                <div class="col-4 col-sm-4">
+                                        <h6><img src="/ok.png" width="20" height="20" class="img-responsive" alt="">2
+                                        </h6>
+                                </div>
+                                <div class="col-4 col-sm-4">
+                                        <h6><img src="/pouce.png" width="20" height="20" class="img-responsive"
+                                                        alt="">36</h6>
+                                </div>
                         </div>
                 </div>
-                    <div class="card-body">
-                      <p class="card-text">Ut dignissim finibus velit, sollicitudin ultricies purus lobortis in. Duis eget ultrices ante. Pellentesque habitant morbi tristique nullam. </p>
-                    </div>
-                    <div class="card-footer container row pied-page">
-                            <div class="col-4 col-sm-4">
-                                    <h6> <img src="/comment.png" width="20" height="20" class="img-responsive" alt="">5</h6>
-                            </div>
-                            <div class="col-4 col-sm-4">
-                                    <h6><img src="/ok.png" width="20" height="20" class="img-responsive" alt="">2</h6>
-                            </div>
-                            <div class="col-4 col-sm-4">
-                               <h6><img src="/pouce.png" width="20" height="20" class="img-responsive" alt="">36</h6>
-                            </div>
-                    </div>
-            </div>
-</div>
+        </div>
 
 
-<script src="lib/jquery/jquery.min.js"></script>
-<script src="lib/bootstrap/js/bootstrap.min.js"></script>
-<script src="/mainTemplate.js"></script>
-<script src="/tools.js"></script>
-<script src="/model.js"></script>
-<script src="/service.js"></script>
-<script src="/listeDefi.js"></script>
+        <script src="lib/jquery/jquery.min.js"></script>
+        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/mainTemplate.js"></script>
+        <script src="/tools.js"></script>
+        <script src="/model.js"></script>
+        <script src="/service.js"></script>
+        <script src="/listeDefi.js"></script>
 </body>
+
 </html>
