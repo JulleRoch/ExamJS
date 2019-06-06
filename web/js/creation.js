@@ -2,6 +2,9 @@ class DefiControlleur {
     constructor() {
         this.api = new DefiService();
         this.apiUser = new UserService();
+        this.apiUser.get((status, user)=>{
+            $('#nav-profil-menu').href = "/profil?id=" + user.id;
+        })
     }
 
     addDefi(){

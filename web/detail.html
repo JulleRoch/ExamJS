@@ -32,6 +32,8 @@
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/index"><img src="/iconCAP.png" width="30" height="30"
                 class="d-inline-block align-top" alt=""> <b>CapOuPasCap?</b></a>
+
+        <h6 id="up-before"><a href="#"><img src="/up.png" width="20" height="20" class="img-responsive" alt=""></a></h6>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -45,13 +47,14 @@
                     <a class="nav-link" href="/creation">Créer un nouveau défi</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Mon profil</a>
+                    <a class="nav-link" id="nav-profil-menu">Mon profil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Se déconnecter</a>
                 </li>
             </ul>
         </div>
+        <h6 id="up-after"><a href="#"><img src="/up.png" width="20" height="20" class="img-responsive" alt=""></a></h6>
     </nav>
 
     <p id="msg"></p>
@@ -84,22 +87,44 @@
     <nav class="navbar fixed-bottom navbar-expand-lg navbar-light bg-light">
 
         <div class="container row pied-page">
-            <div class="col-3 col-sm-3">
+            <div class="col-3 col-sm-4">
                 <h6> <a href="#commentaires"><img src="/comment.png" width="20" height="20" class="img-responsive"
                             alt="" data-toggle="modal" data-target="#dialog-add-comment"></a>
-                            <span id="comment-challenge"></span></h6>
+                    <span id="comment-challenge"></span></h6>
             </div>
             <div class="col-3 col-sm-3">
-                <h6><a href="#participants"><img src="/ok.png" width="20" height="20" class="img-responsive"
-                            alt="" data-toggle="modal" data-target="#dialog-add-realize"></a>
-                            <span id="realize-challenge"></span></h6>
+                <h6><a href="#participants"><img src="/ok.png" width="20" height="20" class="img-responsive" alt=""
+                            data-toggle="modal" data-target="#dialog-add-realize"></a>
+                    <span id="realize-challenge"></span></h6>
             </div>
-            <div class="col-3 col-sm-3">
+            <div class="col-3 col-sm-4">
                 <h6><img id="like-img" src="/pouce.png" width="20" height="20" class="img-responsive" alt=""><span
                         id="like-challenge"></span></h6>
             </div>
-            <div class="col-3 col-sm-3">
-                <h6><a href="#"><img src="/up.png" width="20" height="20" class="img-responsive" alt=""></a></h6>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContentBottom" aria-controls="navbarSupportedContentBottom"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContentBottom">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <h6><img id="maskOnDefi" src="/maskOn.png" width="25" height="25" class="img-responsive" alt="" onclick="return controleur.maskDefi()" hidden></h6>
+                    </li>
+                    <li class="nav-item">
+                        <h6><img id="maskOffDefi" src="/maskOff.png" width="25" height="25" class="img-responsive" alt="" onclick="return controleur.maskDefi()" hidden></h6>
+                    </li>
+                    <li class="nav-item">
+                        <h6><img id="deleteDefi" src="/delete.png" width="25" height="25" class="img-responsive" alt="" onclick="return controleur.deleteDefi()" hidden></h6>
+                    </li>
+                    <li class="nav-item">
+                        <h6><img id="addList" src="/plus.png" width="25" height="25" class="img-responsive" alt="" onclick="return controleur.addListSuivi()"></h6>
+                    </li>
+                    <li class="nav-item">
+                        <h6><img id="deleteList" src="/moins.png" width="25" height="25" class="img-responsive" alt="" onclick="return controleur.deleteListSuivi()" hidden></h6>
+                    </li>
+                </ul>
+
             </div>
 
         </div>
@@ -120,13 +145,16 @@
                     </table>
                 </div>
                 <div class="modal-body">
-                    <form class="style-form" id="form-add-comment" onsubmit="return controleur.addComment()">
+                    <form class="style-form" id="form-add-comment" action="localhost:3333/upload"
+                        onsubmit="return controleur.actionComment()">
+                        <input type="text" id="typeDialog-comment" value="add" hidden />
                         <div class="form-group">
                             <textarea class="form-control" name="description-comment" id="description-comment"
                                 maxlength="140" rows=4 cols=40
                                 placeholder="Votre commentaire ne doit pas dépasser 140 caractères."
                                 required></textarea>
                         </div>
+                        <input type="number" id="id-comment" name="id-comment" hidden />
                         <div class="form-send">
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Poster</button>
                         </div>
@@ -151,20 +179,32 @@
                     </table>
                 </div>
                 <div class="modal-body">
-                    <form class="style-form" id="form-add-realize" onsubmit="return controleur.addRealize()">
+                    <form class="style-form" id="form-add-realize" method="post" enctype="multipart/form-data"
+                        action="/post/upload">
+                        <input type="text" id="typeDialog-realize" value="add" hidden />
                         <div class="form-group">
                             <label for="description-realize">
                                 <h6>Description</h6>
                             </label>
-                            <textarea class="form-control" name="description-realize" id="description-realize"
-                                maxlength="140" rows=4 cols=40
+                            <textarea class="form-control" name="description" id="description-realize" maxlength="140"
+                                rows=4 cols=40
                                 placeholder="La description de votre défi ne doit pas dépasser 140 caractères."
                                 required></textarea>
-                            <label for="preuve-realize">
+                            <div id="check-update" hidden>
+                                <label for="check-update-preuve">
+                                    <h6>Modifier la PJ</h6>
+                                </label>
+                                <input type="checkbox" id="check-update-preuve" />
+                            </div>
+                            <label for="preuve">
                                 <h6>Télécharger une photo ou vidéo pour prouver la réalisation du défi</h6>
                             </label>
-                            <input type="file" id="preuve-realize" name="preuve-realize" accept="image/png, image/jpeg, video/mp4, video/webm, video/ogg" required>
+                            <input type="file" id="preuve" name="preuve"
+                                accept="image/png, image/jpeg, video/mp4, video/webm, video/ogg" required>
                         </div>
+                        <input type="text" id="name-realize" name="name" hidden />
+                        <input type="number" id="id-realize" name="id" hidden />
+                        <input type="number" id="id-defi" name="idDefi" hidden />
                         <div class="form-send">
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Poster</button>
                         </div>

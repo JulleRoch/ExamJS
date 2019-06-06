@@ -14,7 +14,7 @@ module.exports = (app, passport, auth) => {
         res.sendFile(web + req.path  + '.html')
     });
 
-    app.get(['/', '/index', '/creation','/listeDefi','/detail'], auth.isLoggedInWeb, (req, res) => {
+    app.get(['/', '/index', '/creation','/listeDefi','/detail','/profil'], auth.isLoggedInWeb, (req, res) => {
         if (req.originalUrl === '/') {
             res.sendFile(web + 'index.html');
             return

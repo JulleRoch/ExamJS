@@ -24,7 +24,7 @@ module.exports = class PostDAO {
         this.db.each("SELECT * FROM post",
             (err, row) => {
                 if (err == null) {
-                    let p = new Post(row.idUser, row.idDefi, row.description, row.date, row.isRealize, row.typePJ, row.pj, row.approved);
+                    let p = new Post(row.idDefi, row.idUser, row.description, row.date, row.isRealize, row.typePJ, row.pj, row.approved);
                     p.id = row.id;
                     posts.push(p);
                 }
@@ -36,13 +36,31 @@ module.exports = class PostDAO {
             }
         );
     }
-    
+     
+    getById(id, done) {
+        const posts = [];
+        this.db.each("SELECT * FROM post WHERE id=?",[id],
+            (err, row) => {
+                if (err == null) {
+                    let p = new Post(row.idDefi, row.idUser, row.description, row.date, row.isRealize, row.typePJ, row.pj, row.approved);
+                    p.id = row.id;
+                    posts.push(p);
+                }
+            },
+            (err) => {
+                if (err == null && done) {
+                    done(posts);
+                }
+            }
+        );
+    }
+
     getByDefi(idDefi, done) {
         const posts = [];
         this.db.each("SELECT * FROM post WHERE idDefi=?",[idDefi],
             (err, row) => {
                 if (err == null) {
-                    let p = new Post(row.idUser, row.idDefi, row.description, row.date, row.isRealize, row.typePJ, row.pj, row.approved);
+                    let p = new Post(row.idDefi, row.idUser, row.description, row.date, row.isRealize, row.typePJ, row.pj, row.approved);
                     p.id = row.id;
                     posts.push(p);
                 }

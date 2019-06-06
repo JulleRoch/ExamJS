@@ -6,9 +6,33 @@ class ListeDefiControlleur {
         this.apiSuivi = new SuiviService();
         this.listeDefi = $('#listeDefi');
         this.titre = $('#titre');
-        this.order = "date";
+        this.order = this.lireCookie("preference-tri")
+        if (this.order === null) {
+            this.order = "date";
+        }
+        this.apiUser.get((status, user) => {
+            $('#nav-profil-menu').href = "/profil?id=" + user.id;
+        })
         this.gestionTypeList();
         this.displayAllDefis(this.order);
+    }
+
+
+    creerCookie(name, value, days) {
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            var expires = "; expires=" + date.toGMTString();
+        }
+        else var expires = "";
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    lireCookie(name) {
+        const cookie = document.cookie;
+        name = name +"=";
+        if (cookie.indexOf(name) == 0) return cookie.substring(name.length, cookie.length);
+        return null;
     }
 
     gestionTypeList() {
@@ -35,19 +59,31 @@ class ListeDefiControlleur {
                 if (this.typeList === "suivi") {
                     this.idUser = u.id;
                 }
+                $('#nav-liste-defi').classList.remove("active");
+                $('#card-profil').hidden = false;
+                $('#nav-profil').href = "/profil?id=" + this.idUser;
+                $('#nav-creer').href = "/listeDefi?type=byUser&idUser=" + this.idUser;
+                $('#nav-realiser').href = "/listeDefi?type=realize&idUser=" + this.idUser;
+                $('#body-profil').append($('#listeDefi'));
                 this.apiUser.getById(this.idUser, (status, user) => {
                     let debTitre = "";
                     if (this.typeList === "byUser") {
+                        $('#nav-creer').classList.add("active");
                         debTitre = "Les défis proposées par";
                     }
                     if (this.typeList === "realize") {
+                        $('#nav-realiser').classList.add("active");
                         debTitre = "Les défis réalisés par";
                     }
                     let t = debTitre + " " + user.login;
                     if (this.typeList === "suivi") {
+                        $('#nav-suivi').classList.add("active");
                         t = "Mes suivis";
                     }
                     if (u.id === parseInt(this.idUser)) {
+                        $('#nav-profil-menu').classList.add("active");
+                        $('#nav-suivi').hidden = false;
+                        $('#nav-suivi').href = "/listeDefi?type=suivi";
                         if (this.typeList === "byUser") {
                             t = "Vos défis"
                         }
@@ -85,7 +121,7 @@ class ListeDefiControlleur {
                                     <h6 class="gris"><span class="gris">Posté le</span> ${datePost}</h6>
                             </div>
                             <div class="col-6 col-sm-2">
-                                    <h6 class="gris"><span class="gris">par </span>${defi.loginUser}</h6>
+                                    <h6 class="gris"><span class="gris">par </span> <a href="/profil?id=${defi.idUser}" style="color:black">${defi.loginUser}</a></h6>
                             </div>
                             </div>
                         <div class="card-body">
@@ -131,7 +167,7 @@ class ListeDefiControlleur {
                                     <h6 class="gris"><span class="gris">Posté le</span> ${datePost}</h6>
                             </div>
                             <div class="col-6 col-sm-2">
-                                    <h6 class="gris"><span class="gris">par </span>${defi.loginUser}</h6>
+                                    <h6 class="gris"><span class="gris">par </span><a href="/profil?id=${defi.idUser}" style="color:black">${defi.loginUser}</a></h6>
                             </div>
                             </div>
                         <div class="card-body">
@@ -158,6 +194,7 @@ class ListeDefiControlleur {
 
 
     changeOrder(e) {
+        this.creerCookie("preference-tri", e.id, 7)
         this.displayAllDefis(e.id);
     }
 

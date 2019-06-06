@@ -12,36 +12,26 @@ module.exports = class UserDAO {
         return bcrypt.hashSync(password, 10)  // 10 : cost factor -> + élevé = hash + sûr
     }
 
-    insert(user, done){
+    insert(user, done) {
         const stmt = this.db.prepare("INSERT INTO user(login, password) VALUES (?, ?)");
-        stmt.run([user.login, this.hashPassword(user.password)], function(err){
+        stmt.run([user.login, this.hashPassword(user.password)], function (err) {
             done(err);
         });
         stmt.finalize();
     }
-    update(login, user, done) {
-        let nochange = false;
-        this.db.each("SELECT password FROM user WHERE login = ?", [login],
-            (err, row) => {
-                if (err == null) {
-                    if(row.password === user.password){
-                        nochange = true;
-                    }
-                }
-            },
-            () => {
-                let password = this.hashPassword(user.password);
-                if(nochange){
-                    password = user.password;
-                }
-                const stmt = this.db.prepare("UPDATE user SET login=?, password=? WHERE login=?");
-                stmt.run(user.login, password, login, done);
-                stmt.finalize();
-            }
-        );
+    update(id, user, done) {
+        const stmt = this.db.prepare("UPDATE user SET login=?, password=? WHERE id=?");
+        stmt.run(user.login, this.hashPassword(user.password), id, done);
+        stmt.finalize();
     }
 
-    getByLogin(login, done){
+    updateLogin(id, user, done){
+        const stmt = this.db.prepare("UPDATE user SET login=? WHERE id=?");
+        stmt.run(user.login, id, done);
+        stmt.finalize();
+    }
+
+    getByLogin(login, done) {
         let user = null;
         this.db.each("SELECT * FROM user WHERE login = ?", [login],
             (err, row) => {
@@ -54,7 +44,7 @@ module.exports = class UserDAO {
         )
     }
 
-    getById(id, done){
+    getById(id, done) {
         let user = null;
         this.db.each("SELECT * FROM user WHERE id = ?", [id],
             (err, row) => {
@@ -66,7 +56,7 @@ module.exports = class UserDAO {
             () => { done(user) }
         )
     }
-    getAll(done){
+    getAll(done) {
         const users = [];
         this.db.each("SELECT * FROM user",
             (err, row) => {

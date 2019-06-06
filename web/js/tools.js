@@ -7,7 +7,7 @@ const $ = function(selecteur, f) {
         document.querySelectorAll(selecteur).forEach(f)
 }
 
-function ajax(method, url, callback, data) {
+function ajax(method, url, callback, data, type="body") {
     const xhr = new XMLHttpRequest()
     xhr.open(method, encodeURI(url))
     xhr.onload = () => {
@@ -18,8 +18,15 @@ function ajax(method, url, callback, data) {
         }
     }
     if (data !== undefined) {
-        xhr.setRequestHeader('Content-Type', 'application/json')
-        xhr.send(JSON.stringify(data))
+        if(type==="file"){
+            xhr.setRequestHeader('Content-Disposition', 'multipart/form-data')
+            xhr.send(data);
+        }
+        else{
+            xhr.setRequestHeader('Content-Type', 'application/json')
+            xhr.send(JSON.stringify(data))
+        }
+
     } else {
         xhr.send()
     }

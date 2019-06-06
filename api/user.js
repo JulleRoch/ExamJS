@@ -16,6 +16,13 @@ module.exports = (app, dao,auth) => {
         })
     });
 
+    app.get("/user/compare/:password",  (req, res) => {
+        dao.getByLogin(req.user.login, (user)=>{
+            const isSame = dao.comparePassword(req.params.password, user.password);
+            return res.json(isSame);
+        })
+    });
+
 
     app.get("/user/login/:login",  (req, res) => {
         dao.getByLogin(req.params.login, (user) => {
@@ -52,21 +59,36 @@ module.exports = (app, dao,auth) => {
         })
     });
     
-    app.put("/user/:login", auth.isLoggedInAPI, (req, res) => {
+    app.put("/user/:id", auth.isLoggedInAPI, (req, res) => {
         const user = req.body;
-        if (user.login === undefined || user.password === undefined) {
+        if (user.login === undefined) {
             res.status(400).type('text/plain').end()
             return
         }
-        if(user.login === req.user.login){
-            dao.update(req.params.login, user, (err) => {
-                if (err == null) {
-                    res.status(200).type('text/plain').end()
-                } else {
-                    res.status(500).end()
+        dao.getByLogin(req.user.login, (u)=>{
+            if(u.id === parseInt(req.params.id)){
+                let ifPassword = true;
+                if(user.password === undefined || user.password === null || user.password === ""){
+                    dao.updateLogin(req.params.id, user, (err) => {
+                        if (err == null) {
+                            res.status(200).type('text/plain').end()
+                        } else {
+                            res.status(500).end()
+                        }
+                    })
                 }
-            })
-        }
+                else{
+                    dao.update(req.params.id, user, (err) => {
+                        if (err == null) {
+                            res.status(200).type('text/plain').end()
+                        } else {
+                            res.status(500).end()
+                        }
+                    })
+                }
+            }
+        })
+        
     });
 
 };

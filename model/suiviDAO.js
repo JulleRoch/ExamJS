@@ -19,7 +19,6 @@ module.exports = class SuiviDAO {
             (err, row) => {
                 if (err === null) {
                     let s = new Suivi(row.idUser, row.idDefi);
-                    s.id = row.id;
                     suivis.push(s);
                 }
             },
@@ -30,6 +29,22 @@ module.exports = class SuiviDAO {
             }
         );
     }  
+
+    getByDefi(idDefi, idUser, done) {
+        let suivi=null;
+        this.db.each("SELECT * FROM suivi WHERE idUser=? AND idDefi=?", [idUser, idDefi],
+            (err, row) => {
+                if (err === null) {
+                    suivi = new Suivi(row.idUser, row.idDefi);
+                }
+            },
+            (err) => {
+                if (err == null && done) {
+                    done(suivi);
+                }
+            }
+        );
+    } 
     delete(idUser, idDefi, done) {
         const stmt = this.db.prepare("DELETE FROM suivi WHERE idUser=? AND idDefi=?");
         stmt.run(idUser, idDefi, done);

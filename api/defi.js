@@ -79,25 +79,6 @@ module.exports = (app, dao, userdao, likedao, auth) => {
 
     });
 
-    app.delete("/defi/:id", auth.isLoggedInAPI, (req, res) => {
-        userdao.getByLogin(req.user.login, (user) => {
-            if (user == null) {
-                res.status(404).type('text/plain').end()
-            } else {
-                if (user.id === req.params.id) {
-                    dao.delete(req.params.id, (err) => {
-                        if (err == null) {
-                            res.status(200).type('text/plain').end()
-                        } else {
-                            res.status(500).end()
-                        }
-                    })
-                }
-
-            }
-        })
-    });
-
     app.put("/defi/:id", auth.isLoggedInAPI, (req, res) => {
         const defi = req.body;
         if (defi.nom === undefined || defi.description === undefined || defi.idUser === undefined || defi.date === undefined || defi.masked === undefined || defi.nbLike === undefined || defi.nbComment === undefined || defi.nbRealize === undefined) {
@@ -154,8 +135,6 @@ module.exports = (app, dao, userdao, likedao, auth) => {
                 }
                 if (user.id === like.idUser) {
                     likedao.getLike(like.idUser, like.idDefi, (l) => {
-                        console.log("l" + l)
-                        console.log("like" + like);
                         if (l === null) {
                             //-1
                             dao.updateLike(like.idDefi, false, (err) => {
@@ -179,6 +158,22 @@ module.exports = (app, dao, userdao, likedao, auth) => {
                     })
                 }
 
+            }
+        })
+    });
+
+    app.delete("/defi/:id", auth.isLoggedInAPI, (req, res) => {
+        userdao.getByLogin(req.user.login, (user) => {
+            if (user == null) {
+                res.status(404).type('text/plain').end()
+            } else {
+                dao.delete(req.params.id, (err) => {
+                    if (err == null) {
+                        res.status(200).type('text/plain').end()
+                    } else {
+                        res.status(500).end()
+                    }
+                })
             }
         })
     });

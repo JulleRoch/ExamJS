@@ -5,7 +5,7 @@ module.exports = (app, dao, userdao, defidao, auth) => {
             if (user == null) {
                 res.status(404).type('text/plain').end()
             } else {
-                if(user.id === parseInt(req.params.id)){
+                if (user.id === parseInt(req.params.id)) {
                     dao.getByUser(req.params.id, (suivis) => {
                         defidao.getAll((defis) => {
                             return res.json(defis)
@@ -16,7 +16,19 @@ module.exports = (app, dao, userdao, defidao, auth) => {
         })
     });
 
-    app.post("/suivi",  (req, res) => {
+    app.get("/suivi/defi/:id", auth.isLoggedInAPI, (req, res) => {
+        userdao.getByLogin(req.user.login, (user) => {
+            if (user == null) {
+                res.status(404).type('text/plain').end()
+            } else {
+                dao.getByDefi(req.params.id, user.id, (suivi) => {
+                    return res.json(suivi)
+                })
+            }
+        })
+    });
+
+    app.post("/suivi", (req, res) => {
         const suivi = req.body;
         if (suivi.idDefi === undefined) {
             res.status(400).type('text/plain').end()
@@ -26,10 +38,10 @@ module.exports = (app, dao, userdao, defidao, auth) => {
             if (user == null) {
                 res.status(404).type('text/plain').end()
             } else {
-                if(suivi.idUser === undefined || suivi.idUser === null){
+                if (suivi.idUser === undefined || suivi.idUser === null) {
                     suivi.idUser = user.id;
                 }
-                if(user.id === suivi.idUser){
+                if (user.id === suivi.idUser) {
                     dao.insert(suivi, (err) => {
                         if (err == null) {
                             res.status(200).type('text/plain').end()
@@ -40,7 +52,7 @@ module.exports = (app, dao, userdao, defidao, auth) => {
                 }
             }
         })
-        
+
     });
 
     app.delete("/suivi/:idDefi", auth.isLoggedInAPI, (req, res) => {

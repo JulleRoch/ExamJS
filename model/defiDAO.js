@@ -67,7 +67,7 @@ module.exports = class DefiDAO {
                 }
                 rWhere +=")";
             }
-            if(type="byId"){
+            if(type==="byId"){
                 rWhere +=  " " + "id =" + id;
             }
         }
@@ -168,19 +168,6 @@ module.exports = class DefiDAO {
                 }
             }
         );
-    }
-
-    getById(id, done) {
-        let defi = null
-        this.db.each("SELECT * FROM defi WHERE id = ?", [id],
-            (err, row) => {
-                if (err == null) {
-                    defi = new defi(row.nom, row.description, row.idUser, row.date, row.masked, row.nbLike, row.nbComment, row.nbRealize);
-                    defi.id = id;
-                }
-            },
-            () => { done(defi) }
-        )
     }
 
     delete(id, done) {

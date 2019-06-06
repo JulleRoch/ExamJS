@@ -17,6 +17,7 @@ const postdao = new PostDAO(db);
 require('./model/seeder')(userdao, defidao, likedao, suividao, postdao);
 
 const express = require('express');
+const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
@@ -26,19 +27,21 @@ app.use(cookieSession({
     name: 'session',
     keys: ['key1', 'key2']
 }));
+app.use(fileUpload());
+
 app.use(bodyParser.urlencoded({ extended: false })); // pour les 'form' HTML
 app.use(bodyParser.json());
 app.use(morgan('dev')); // toute les requêtes HTTP dans le log du serveur
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 const auth = require('./passport')(passport, userdao);
 require('./api/user')(app, userdao, auth);
 require('./api/defi')(app, defidao, userdao, likedao, auth);
 require('./api/like')(app, likedao, userdao, auth);
 require('./api/suivi')(app, suividao, userdao, defidao, auth);
-require('./api/post')(app, postdao, userdao,  auth);
+require('./api/post')(app, postdao, userdao, defidao, auth);
+require('./upload')(app, auth);
 require('./route')(app, passport, auth);
 
 

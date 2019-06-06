@@ -32,6 +32,8 @@
         <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light" id="navbar">
                 <a class="navbar-brand" href="/index"><img src="/iconCAP.png" width="30" height="30"
                                 class="d-inline-block img-responsive" alt=""> <b>CapOuPasCap?</b></a>
+                <h6 id="up-before"><a href="#"><img src="/up.png" width="20" height="20" class="img-responsive"
+                                        alt=""></a></h6>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -39,56 +41,50 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
-                                <li class="nav-item active">
-                                        <a class="nav-link" href="/listeDefi">Les défis</a>
+                                <li class="nav-item">
+                                        <a class="nav-link active" id="nav-liste-defi" href="/listeDefi">Les défis</a>
                                 </li>
                                 <li class="nav-item">
                                         <a class="nav-link" href="/creation">Créer un nouveau défi</a>
                                 </li>
                                 <li class="nav-item">
-                                        <a class="nav-link" href="">Mon profil</a>
+                                        <a class="nav-link" id="nav-profil-menu">Mon profil</a>
                                 </li>
                                 <li class="nav-item">
                                         <a class="nav-link" href="/logout">Se déconnecter</a>
                                 </li>
                         </ul>
                 </div>
+                <h6 id="up-after"><a href="#"><img src="/up.png" width="20" height="20" class="img-responsive"
+                                        alt=""></a></h6>
         </nav>
 
         <div>
                 <h3 style="text-align: center" id="titre"></h3>
         </div>
+
         <div id="listeDefi">
-               < <div class="card">
-                        <div class="card-header container en-tete row">
-                                <div class="col-12 col-sm-8">
-                                        <h4>Challenge Cheese</h4>
-                                </div>
-                                <div class="col-6 col-sm-2">
-                                        <h6 class="gris"><span class="gris">Posté le</span> 3 juin 2018</h6>
-                                </div>
-                                <div class="col-6 col-sm-2">
-                                        <h6 class="gris"><span class="gris">par </span>login3568</h6>
-                                </div>
-                        </div>
-                        <div class="card-body">
-                                <p class="card-text">Ut dignissim finibus velit, sollicitudin ultricies purus lobortis
-                                        in. Duis eget ultrices ante. Pellentesque habitant morbi tristique nullam. </p>
-                        </div>
-                        <div class="card-footer container row pied-page">
-                                <div class="col-4 col-sm-4">
-                                        <h6> <img src="/comment.png" width="20" height="20" class="img-responsive"
-                                                        alt="">5</h6>
-                                </div>
-                                <div class="col-4 col-sm-4">
-                                        <h6><img src="/ok.png" width="20" height="20" class="img-responsive" alt="">2
-                                        </h6>
-                                </div>
-                                <div class="col-4 col-sm-4">
-                                        <h6><img src="/pouce.png" width="20" height="20" class="img-responsive"
-                                                        alt="">36</h6>
-                                </div>
-                        </div>
+        </div>
+
+        <div class="card" id="card-profil" hidden>
+                <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                                <li class="nav-item">
+                                        <a class="nav-link" href="#" id="nav-profil">Profil</a>
+                                </li>
+                                <li class="nav-item">
+                                        <a class="nav-link" href="#" id="nav-creer">Défis crées</a>
+                                </li>
+                                <li class="nav-item">
+                                        <a class="nav-link" href="#" id="nav-realiser">Défis réalisés</a>
+                                </li>
+                                <li class="nav-item">
+                                        <a class="nav-link" href="#" id="nav-suivi" hidden>Défis Suivis</a>
+                                </li>
+                        </ul>
+                </div>
+                <div class="card-body" id="body-profil">
+
                 </div>
         </div>
 

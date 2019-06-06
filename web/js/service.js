@@ -39,6 +39,10 @@ class UserService extends Service{
     getAll(done){
         ajax("GET", this.serviceUrl + "/all", done);
     }
+
+    compare(password, done){
+        ajax("GET", this.serviceUrl + "/compare/" +password, done);
+    }
 }
 
 class DefiService extends Service{
@@ -96,6 +100,9 @@ class SuiviService extends Service{
     getByUser(idUser, done) {
         ajax("GET", this.serviceUrl + "/" + idUser, done)
     }
+    getByDefi(idDefi, done) {
+        ajax("GET", this.serviceUrl + "/defi/" + idDefi, done)
+    }
 }
 class PostService extends Service{
     constructor(){
@@ -108,5 +115,16 @@ class PostService extends Service{
     
     getRealizeByDefi(id, done){
         ajax("GET", this.serviceUrl + "/realize/" + id, done)
+    }
+}
+
+class UploadService {
+    
+    constructor(){
+        this.serviceUrl = "http://localhost:3333/upload";
+    }
+
+    upload(objet, done){
+        ajax("POST", this.serviceUrl, done, objet, "file")
     }
 }

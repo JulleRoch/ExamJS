@@ -330,3 +330,21 @@ hr {
   margin: 15px 0;
 }
 
+
+
+@media (max-width: 800px){
+  #up-after {
+    display:none;
+  }
+  
+  #card-profil .card-header{
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 801px){
+  #up-before {
+    display:none;
+  }
+}
+
