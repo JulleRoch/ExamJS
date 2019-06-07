@@ -73,10 +73,4 @@ module.exports = class UserDAO {
             }
         );
     }
-
-    delete(login, done) {
-        const stmt = this.db.prepare("DELETE FROM user WHERE login=?");
-        stmt.run(login, done);
-        stmt.finalize();
-    }
 };
